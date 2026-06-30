@@ -15,13 +15,13 @@ verification token back in Swift. Ships as a SwiftUI `UIViewRepresentable`.
 In Xcode: **File → Add Package Dependencies…** and paste the repository URL:
 
 ```
-https://github.com/redeyed/sentinel-ios-sdk.git
+https://github.com/bruted/sentinel-ios-sdk.git
 ```
 
 Or add it to your `Package.swift`:
 
 ```swift
-.package(url: "https://github.com/redeyed/sentinel-ios-sdk.git", from: "1.0.0")
+.package(url: "https://github.com/bruted/sentinel-ios-sdk.git", from: "1.0.0")
 ```
 
 Requires **iOS 15+**. No external dependencies.
