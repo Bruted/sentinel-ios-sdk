@@ -80,8 +80,9 @@ enum SentinelHTML {
 /// `WKWebView` and returns the verification token via ``onToken``.
 ///
 /// The view performs **no verification** — send the token to *your own server*,
-/// which calls `POST {baseURL}/api/v1/verify` with the secret `X-Api-Key`
-/// header. The API key must never live in the app.
+/// which calls `POST {baseURL}/sentinel/siteverify` with a JSON body of
+/// `{ "secret": "<SECRET KEY>", "response": "<token>" }` (optional `"remoteip"`).
+/// The Secret Key must never live in the app.
 ///
 /// ```swift
 /// SentinelCaptchaView(siteKey: "redeyed-web") { token in

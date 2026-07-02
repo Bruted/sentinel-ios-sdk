@@ -3,10 +3,11 @@
 Render the **Redeyed Sentinel** CAPTCHA inside a native `WKWebView` and get the
 verification token back in Swift. Ships as a SwiftUI `UIViewRepresentable`.
 
-> **Free to use — but you need keys.** Create a Sentinel **site key** (public,
-> safe to ship) and a secret **API key** (server-only) in the
-> [Redeyed Lab](https://redeyed.com/lab). The SDK only renders the widget and
-> returns a token; **verification happens on your server.**
+> **Free to use — but you need keys.** Create a Sentinel **Site Key** (public,
+> safe to ship) and a **Secret Key** (server-only) in the
+> [Redeyed Lab](https://redeyed.com/lab) → Sentinel → Sites. The SDK only
+> renders the widget and returns a token; **verification happens on your
+> server.**
 
 ---
 
@@ -70,21 +71,22 @@ SentinelCaptchaView(config: config) { token in sendTokenToServer(token) }
 
 ## Server-side verification (required)
 
-The app must **never** hold your secret API key. After you receive the token,
+The app must **never** hold your Secret Key. After you receive the token,
 POST it from your backend:
 
 ```
-POST {baseURL}/api/v1/verify          (default baseURL: https://redeyed.com)
+POST {baseURL}/sentinel/siteverify   (default baseURL: https://redeyed.com)
 Headers:
-    X-Api-Key: <YOUR SECRET API KEY>
     Content-Type: application/json
 Body:
-    { "site_key": "redeyed-web", "token": "<token from the SDK>" }
+    { "secret": "<YOUR SECRET KEY>", "response": "<token from the SDK>" }
 ```
 
-The verification **succeeds** when the response has
-`data.success === true` (or `success === true`). Only then should you treat the
-user as human.
+You may also include an optional `"remoteip"` field with the end user's IP. The
+verification **succeeds** when the response has `success === true`; the response
+also carries `outcome` and `score`. Only then should you treat the user as
+human. The Secret Key is shown once in the Redeyed Lab → Sentinel → Sites and
+stays server-side.
 
 ---
 
