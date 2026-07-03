@@ -51,9 +51,10 @@ With optional widget/theme/scheme and an error handler:
 ```swift
 SentinelCaptchaView(
     siteKey: "redeyed-web",
-    widget: "behavioral",   // optional
-    theme:  "auto",          // optional
-    scheme: "default",       // optional
+    widget: "behavioral",       // optional
+    theme:  "auto",              // optional
+    scheme: "default",           // optional
+    difficulty: "medium",        // optional: easy|medium|hard|max or 1-6
     // baseURL defaults to https://redeyed.com
     onError: { error in print("Captcha failed: \(error)") },
     onToken: { token in sendTokenToServer(token) }

@@ -23,6 +23,11 @@ public struct SentinelCaptcha: Equatable {
     /// Optional colour scheme (e.g. `"default"`) → `data-scheme`.
     public let scheme: String?
 
+    /// Optional challenge difficulty (`"easy"`, `"medium"`, `"hard"`, `"max"`,
+    /// or `"1"`…`"6"`) → `data-difficulty`. Only raises difficulty above the
+    /// adaptive baseline.
+    public let difficulty: String?
+
     /// Origin serving `sentinel.js`. Defaults to ``defaultBaseURL``.
     public let baseURL: String
 
@@ -32,12 +37,14 @@ public struct SentinelCaptcha: Equatable {
         widget: String? = nil,
         theme: String? = nil,
         scheme: String? = nil,
+        difficulty: String? = nil,
         baseURL: String = SentinelCaptcha.defaultBaseURL
     ) {
         self.siteKey = siteKey
         self.widget = widget
         self.theme = theme
         self.scheme = scheme
+        self.difficulty = difficulty
         self.baseURL = baseURL
     }
 }

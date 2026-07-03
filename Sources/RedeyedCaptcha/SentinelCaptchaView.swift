@@ -29,6 +29,9 @@ enum SentinelHTML {
         if let scheme = config.scheme {
             attrs += " data-scheme=\"\(escapeAttribute(scheme))\""
         }
+        if let difficulty = config.difficulty {
+            attrs += " data-difficulty=\"\(escapeAttribute(difficulty))\""
+        }
         let scriptSrc = escapeAttribute("\(config.baseURL)/sentinel.js")
 
         return """
@@ -112,6 +115,7 @@ public struct SentinelCaptchaView: UIViewRepresentable {
         widget: String? = nil,
         theme: String? = nil,
         scheme: String? = nil,
+        difficulty: String? = nil,
         baseURL: String = SentinelCaptcha.defaultBaseURL,
         onError: ((Error) -> Void)? = nil,
         onToken: @escaping (String) -> Void
@@ -122,6 +126,7 @@ public struct SentinelCaptchaView: UIViewRepresentable {
                 widget: widget,
                 theme: theme,
                 scheme: scheme,
+                difficulty: difficulty,
                 baseURL: baseURL
             ),
             onError: onError,
