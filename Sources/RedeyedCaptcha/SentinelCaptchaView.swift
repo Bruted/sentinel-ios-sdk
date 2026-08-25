@@ -29,6 +29,9 @@ enum SentinelHTML {
         if let scheme = config.scheme {
             attrs += " data-scheme=\"\(escapeAttribute(scheme))\""
         }
+        if let difficulty = config.difficulty {
+            attrs += " data-difficulty=\"\(escapeAttribute(difficulty))\""
+        }
         let scriptSrc = escapeAttribute("\(config.baseURL)/sentinel.js")
 
         return """
@@ -80,8 +83,9 @@ enum SentinelHTML {
 /// `WKWebView` and returns the verification token via ``onToken``.
 ///
 /// The view performs **no verification** — send the token to *your own server*,
-/// which calls `POST {baseURL}/api/v1/verify` with the secret `X-Api-Key`
-/// header. The API key must never live in the app.
+/// which calls `POST {baseURL}/sentinel/siteverify` with a JSON body of
+/// `{ "secret": "<SECRET KEY>", "response": "<token>" }` (optional `"remoteip"`).
+/// The Secret Key must never live in the app.
 ///
 /// ```swift
 /// SentinelCaptchaView(siteKey: "redeyed-web") { token in
@@ -111,6 +115,7 @@ public struct SentinelCaptchaView: UIViewRepresentable {
         widget: String? = nil,
         theme: String? = nil,
         scheme: String? = nil,
+        difficulty: String? = nil,
         baseURL: String = SentinelCaptcha.defaultBaseURL,
         onError: ((Error) -> Void)? = nil,
         onToken: @escaping (String) -> Void
@@ -121,6 +126,7 @@ public struct SentinelCaptchaView: UIViewRepresentable {
                 widget: widget,
                 theme: theme,
                 scheme: scheme,
+                difficulty: difficulty,
                 baseURL: baseURL
             ),
             onError: onError,
