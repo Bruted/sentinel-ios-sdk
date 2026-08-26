@@ -22,7 +22,7 @@ https://github.com/bruted/sentinel-ios-sdk.git
 Or add it to your `Package.swift`:
 
 ```swift
-.package(url: "https://github.com/bruted/sentinel-ios-sdk.git", from: "1.0.0")
+.package(url: "https://github.com/bruted/sentinel-ios-sdk.git", from: "1.0.1")
 ```
 
 Requires **iOS 15+**. No external dependencies.
@@ -53,13 +53,19 @@ SentinelCaptchaView(
     siteKey: "redeyed-web",
     widget: "behavioral",       // optional
     theme:  "auto",              // optional
-    scheme: "default",           // optional
+    scheme: "default",           // optional: see schemes below
     difficulty: "medium",        // optional: easy|medium|hard|max or 1-6
+    width: "full",               // optional → data-width (e.g. full|100%|340px)
     // baseURL defaults to https://redeyed.com
     onError: { error in print("Captcha failed: \(error)") },
     onToken: { token in sendTokenToServer(token) }
 )
 ```
+
+**Colour schemes** (`scheme` → `data-scheme`): `default`, `ocean`, `forest`,
+`sunset`, `graphite`, `royalty`, `ruby`, `hacker`, `monochrome`, `midnight`,
+`aurora`. (`midnight` and `aurora` are premium/animated; entitlement is enforced
+server-side.)
 
 Or pass a configuration value:
 
@@ -106,6 +112,11 @@ Inside that page it listens for the bubbling `sentinel:solved` CustomEvent
 `WKScriptMessageHandler` named **`sentinel`**
 (`window.webkit.messageHandlers.sentinel.postMessage(token)`) → your `onToken`
 closure. The site key is HTML-attribute-escaped before being injected.
+
+## Changelog
+
+### 1.0.1
+- Add `width` option (`data-width`) and `midnight`/`aurora` schemes.
 
 ## License
 

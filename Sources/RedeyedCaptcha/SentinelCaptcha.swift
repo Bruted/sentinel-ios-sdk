@@ -11,6 +11,9 @@ public struct SentinelCaptcha: Equatable {
     /// Default origin that serves `sentinel.js`.
     public static let defaultBaseURL = "https://redeyed.com"
 
+    /// This SDK's semantic version.
+    public static let version = "1.0.1"
+
     /// Public Sentinel site key, e.g. `"redeyed-web"`.
     public let siteKey: String
 
@@ -20,13 +23,20 @@ public struct SentinelCaptcha: Equatable {
     /// Optional theme (e.g. `"auto"`, `"light"`, `"dark"`) → `data-theme`.
     public let theme: String?
 
-    /// Optional colour scheme (e.g. `"default"`) → `data-scheme`.
+    /// Optional colour scheme → `data-scheme`. One of: `"default"`, `"ocean"`,
+    /// `"forest"`, `"sunset"`, `"graphite"`, `"royalty"`, `"ruby"`, `"hacker"`,
+    /// `"monochrome"`, `"midnight"`, `"aurora"`. (`"midnight"`/`"aurora"` are
+    /// premium and the server enforces entitlement.)
     public let scheme: String?
 
     /// Optional challenge difficulty (`"easy"`, `"medium"`, `"hard"`, `"max"`,
     /// or `"1"`…`"6"`) → `data-difficulty`. Only raises difficulty above the
     /// adaptive baseline.
     public let difficulty: String?
+
+    /// Optional widget width (e.g. `"full"`, `"100%"`, `"340px"`) →
+    /// `data-width`. Emitted only when set.
+    public let width: String?
 
     /// Origin serving `sentinel.js`. Defaults to ``defaultBaseURL``.
     public let baseURL: String
@@ -38,6 +48,7 @@ public struct SentinelCaptcha: Equatable {
         theme: String? = nil,
         scheme: String? = nil,
         difficulty: String? = nil,
+        width: String? = nil,
         baseURL: String = SentinelCaptcha.defaultBaseURL
     ) {
         self.siteKey = siteKey
@@ -45,6 +56,7 @@ public struct SentinelCaptcha: Equatable {
         self.theme = theme
         self.scheme = scheme
         self.difficulty = difficulty
+        self.width = width
         self.baseURL = baseURL
     }
 }
