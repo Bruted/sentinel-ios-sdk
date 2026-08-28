@@ -34,6 +34,11 @@ public struct SentinelCaptcha: Equatable {
     /// adaptive baseline.
     public let difficulty: String?
 
+    /// Optional number of verification steps (1...7) → `data-widget-steps`.
+    /// Paid plans only, and a floor rather than a ceiling: it raises the step
+    /// count above the adaptive baseline and never lowers it.
+    public let widgetSteps: Int?
+
     /// Optional widget width (e.g. `"full"`, `"100%"`, `"340px"`) →
     /// `data-width`. Emitted only when set.
     public let width: String?
@@ -48,6 +53,7 @@ public struct SentinelCaptcha: Equatable {
         theme: String? = nil,
         scheme: String? = nil,
         difficulty: String? = nil,
+        widgetSteps: Int? = nil,
         width: String? = nil,
         baseURL: String = SentinelCaptcha.defaultBaseURL
     ) {
@@ -56,6 +62,7 @@ public struct SentinelCaptcha: Equatable {
         self.theme = theme
         self.scheme = scheme
         self.difficulty = difficulty
+        self.widgetSteps = widgetSteps
         self.width = width
         self.baseURL = baseURL
     }
